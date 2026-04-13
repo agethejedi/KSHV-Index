@@ -1,0 +1,2 @@
+import type { KSResult } from '../types';
+export function DriversList({ result }: { result: KSResult | null }) { return <div className="card drivers-card"><div className="card-header"><h3>KS Drivers</h3><span>Largest contributors to the current score</span></div><div className="drivers-list">{result ? result.drivers.map((driver)=><div key={driver.label} className={`driver-item ${driver.direction}`}><span>{driver.label}</span><strong>{driver.direction==='positive' ? '+' : '−'}{(driver.impact*100).toFixed(1)}</strong></div>) : <p>No drivers yet.</p>}</div></div>; }

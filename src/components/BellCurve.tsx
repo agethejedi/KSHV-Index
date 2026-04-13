@@ -1,0 +1,5 @@
+import type { KSResult } from '../types';
+export function BellCurve({ result }: { result: KSResult | null }) {
+  const width=520, height=210, baseline=160; const points:string[]=[]; for(let x=10;x<=width-10;x+=2){ const nx=((x-10)/(width-20))*6-3; const y=baseline-Math.exp(-0.5*nx*nx)*95; points.push(`${x},${y}`);} const markerX=result ? 10+(result.percentile*(width-20)) : width/2;
+  return <div className="card curve-card"><div className="card-header"><h3>KS Distribution</h3><span>{result ? result.metroLabel : 'Selected market'}</span></div><svg viewBox={`0 0 ${width} ${height}`} className="curve-svg"><path d={`M ${points.join(' L ')}`} className="curve-path"/><line x1="10" y1={baseline} x2={width-10} y2={baseline} className="curve-axis"/>{result && <><line x1={markerX} y1={30} x2={markerX} y2={baseline} className="curve-marker"/><circle cx={markerX} cy={baseline} r="7" className="curve-dot"/><text x={markerX} y={24} className="curve-label" textAnchor="middle">You</text></>}</svg><div className="curve-scale"><span>Lower position</span><span>Middle</span><span>Higher position</span></div></div>;
+}
